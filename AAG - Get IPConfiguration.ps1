@@ -1,10 +1,10 @@
 ﻿param
 (
         [Parameter(Mandatory = $false)]
-	    [String]$resourceGroupName = "integ-shared-rg01-bslau-prod",
+	    [String]$resourceGroupName = "integ-shared-rg01-xxxx-prod",
 
         [Parameter(Mandatory = $false)]
-	    [String]$appGwName = "integ-shared-appgw-bslau-dev-aes"
+	    [String]$appGwName = "integ-shared-appgw-xxxx-dev-aes"
 )
 
 function Check-Session () {

@@ -45,13 +45,13 @@ if(Test-Path $tempFolder)
 $ErrorActionPreference = "Continue"   
 
 Write-Host "Cloning Git Repository"
-git config --global user.email "RussellDavid.McCloy@crownmelbourne.com.au"   # THIS IS VERY BAD
-git config --global user.name "rm393022"                                     # THIS IS VERY BAD
+git config --global user.email "RussellDavid.McCloy@xxxx.com.au"   # THIS IS VERY BAD
+git config --global user.name "xxxx"                                     # THIS IS VERY BAD
 
 git config --global push.default simple   # Push only the current branch
 git config --global core.autocrlf false   # Formatting-and-Whitespace - https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#Formatting-and-Whitespace  
 
-git clone -q "http://msd-tfs-01:8080/tfs/crownconnect/_git/Azure%20API%20Management" $tempFolder     # parameterise this: Azure%20API%20Management
+git clone -q "http://msd-tfs-01:8080/tfs/xxx/_git/Azure%20API%20Management" $tempFolder     # parameterise this: Azure%20API%20Management
     
 Write-Host "Changing to folder $tempFolder"
 cd $tempFolder

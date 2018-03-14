@@ -77,7 +77,7 @@ catch
 
 Write-Host "Setting GIT credentials"
 git config --global user.email "russell.mccloy@googlemail.com"   
-git config --global user.name "Wombat22"                       
+git config --global user.name "xxxx"                       
 
 #git config --global push.default simple   # Push only the current branch
 #git config --global core.autocrlf false   # Formatting-and-Whitespace - https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#Formatting-and-Whitespace  

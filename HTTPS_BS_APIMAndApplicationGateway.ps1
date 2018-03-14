@@ -36,11 +36,11 @@ $apimVirtualNetwork = New-AzureRmApiManagementVirtualNetwork -Location "Australi
 
 #Upload the certificate with private key for the domain. For this example it will be *.contoso.net.
 $certUploadResult = Import-AzureRmApiManagementHostnameCertificate -ResourceGroupName $resourceGroupName `
-    -Name "sub-apimgt-mex-dev01-ase" -HostnameType "Proxy" -PfxPath "C:\Users\Rusty\Desktop\api.bluescope.net.pfx" -PfxPassword "Wombat22" -PassThru
+    -Name "sub-apimgt-mex-dev01-ase" -HostnameType "Proxy" -PfxPath "C:\Users\Rusty\Desktop\api.xxxx.net.pfx" -PfxPassword "Wombat22" -PassThru
 
 
 # Once the certificate is uploaded, create a hostname configuration object for the proxy with a hostname of api.contoso.net, as the example certificate provides authority for the *.contoso.net domain.
-$proxyHostnameConfig = New-AzureRmApiManagementHostnameConfiguration -CertificateThumbprint $certUploadResult.Thumbprint -Hostname "blueScopeAPI"
+$proxyHostnameConfig = New-AzureRmApiManagementHostnameConfiguration -CertificateThumbprint $certUploadResult.Thumbprint -Hostname "xxxxAPI"
     
 $result = Set-AzureRmApiManagementHostnames -Name "sub-apimgt-mex-dev01-ase" -ResourceGroupName $resourceGroupName -ProxyHostnameConfiguration $proxyHostnameConfig
 
@@ -72,17 +72,17 @@ $fp01 = New-AzureRmApplicationGatewayFrontendPort -Name "port01"  -Port 443
 $fipconfig01 = New-AzureRmApplicationGatewayFrontendIPConfig -Name "frontend1" -PublicIPAddress $publicip
 
 # Configure the certificate for the Application Gateway, used to decrypt and re-encrypt the traffic passing through.
-$cert = New-AzureRmApplicationGatewaySslCertificate -Name "appGatewaySslCert" -CertificateFile "C:\Users\Rusty\Desktop\api.bluescope.net.pfx" -Password "Wombat22"
+$cert = New-AzureRmApplicationGatewaySslCertificate -Name "appGatewaySslCert" -CertificateFile "C:\Users\Rusty\Desktop\api.xxxx.net.pfx" -Password "Wombat22"
 
 # Create the HTTP listener for the Application Gateway. Assign the front-end IP configuration, port, and ssl certificate to it.
 $listener = New-AzureRmApplicationGatewayHttpListener -Name "appGatewayHttpsListener" -Protocol "Https" -FrontendIPConfiguration $fipconfig01 -FrontendPort $fp01 -SslCertificate $cert
 
 # Create a custom probe to the API Management service ContosoApi proxy domain endpoint. The path /status-0123456789abcdef is a default health endpoint hosted on all the API Management services. Set api.contoso.net as a custom probe hostname to secure it with SSL certificate.
 # The hostname contosoapi.azure-api.net is the default proxy hostname configured when a service named contosoapi is created in public Azure.
-#$apimprobe = New-AzureRmApplicationGatewayProbeConfig -Name "apimproxyprobe" -Protocol Http -HostName "blueScopeAPI" -Path "/status-0123456789abcdef" -Interval 30 -Timeout 120 -UnhealthyThreshold 8
+#$apimprobe = New-AzureRmApplicationGatewayProbeConfig -Name "apimproxyprobe" -Protocol Http -HostName "xxxxAPI" -Path "/status-0123456789abcdef" -Interval 30 -Timeout 120 -UnhealthyThreshold 8
 
 # Upload the certificate to be used on the SSL-enabled backend pool resources.
-$authcert = New-AzureRmApplicationGatewayAuthenticationCertificate -Name "whitelistcert1" -CertificateFile "C:\Users\Rusty\Desktop\BlueScopeAuthCert.cer"
+$authcert = New-AzureRmApplicationGatewayAuthenticationCertificate -Name "whitelistcert1" -CertificateFile "C:\Users\Rusty\Desktop\xxxxAuthCert.cer"
 
 # Configure HTTP backend settings for the Application Gateway. This includes setting a time-out limit for backend request after which they are cancelled. This value is different from the probe time-out.
 $apimPoolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name "apimPoolSetting" -Port 443 -Protocol Https -CookieBasedAffinity "Disabled" -Probe $apimprobe -AuthenticationCertificates $authcert -RequestTimeout 180

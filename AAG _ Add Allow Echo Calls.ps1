@@ -1,13 +1,13 @@
 ﻿param
 (
         [Parameter(Mandatory = $false)]
-	    [String]$resourceGroupName = "integ-shared-rg01-bslau-dev",
+	    [String]$resourceGroupName = "integ-shared-rg01-xxxx-dev",
 
         [Parameter(Mandatory = $false)]
-	    [String]$apimName = "integ-shared-apim-bslau-dev-aes",
+	    [String]$apimName = "integ-shared-apim-xxxx-dev-aes",
 
         [Parameter(Mandatory = $false)]
-	    [String]$appGwName = "integ-shared-appgw-bslau-dev-aes"
+	    [String]$appGwName = "integ-shared-appgw-xxxx-dev-aes"
 )
 
 function Check-Session () {

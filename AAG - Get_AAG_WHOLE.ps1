@@ -1,10 +1,10 @@
 ﻿ param
 (
         [Parameter(Mandatory = $false)]
-	    [String]$resourceGroup = "integ-shared-rg01-bslau-dev",
+	    [String]$resourceGroup = "integ-shared-rg01-xxxx-dev",
   
         [Parameter(Mandatory = $false)]
-	    [String]$appGateway = "integ-shared-appgw-bslau-dev-aes"
+	    [String]$appGateway = "integ-shared-appgw-xxxx-dev-aes"
 )
 
 . "D:\MyDropbox\Dropbox (Personal)\My Documents\Technical - Azure Code Etc\General Powershell\Azure\login_to_azure.ps1"

@@ -1,10 +1,10 @@
 ﻿param
 (
         [Parameter(Mandatory = $false)]
-	    [String]$resourceGroupName = "integ-shared-rg01-bslau-dev",
+	    [String]$resourceGroupName = "integ-shared-rg01-xxxx-dev",
 
         [Parameter(Mandatory = $false)]
-	    [String]$appGwName = "integ-shared-appgw-bslau-dev-aes"
+	    [String]$appGwName = "integ-shared-appgw-xxxx-dev-aes"
 
 )
 
@@ -27,7 +27,7 @@ Check-Session
 
 $AppGw = Get-AzureRmApplicationGateway -Name $appGwName -ResourceGroupName $resourceGroupName
 
-$listener = Get-AzureRmApplicationGatewayHttpListener -Name 'apiaud.bluescope.com' -ApplicationGateway $AppGw 
+$listener = Get-AzureRmApplicationGatewayHttpListener -Name 'apiaud.xxxx.com' -ApplicationGateway $AppGw 
 
 $listener
 

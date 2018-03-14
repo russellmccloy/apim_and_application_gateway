@@ -1,10 +1,10 @@
 ﻿ param
 (
         [Parameter(Mandatory = $true)]
-	    [String]$resourceGroup = "integ-shared-rg01-bslau-dev",
+	    [String]$resourceGroup = "integ-shared-rg01-xxxx-dev",
   
         [Parameter(Mandatory = $true)]
-	    [String]$appGateway = "integ-shared-appgw-bslau-dev-aes",
+	    [String]$appGateway = "integ-shared-appgw-xxxx-dev-aes",
 
         [Parameter(Mandatory = $true)]
 	    [switch]$stop
