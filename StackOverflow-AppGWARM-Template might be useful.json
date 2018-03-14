@@ -1,0 +1,383 @@
+{
+"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+"contentVersion": "1.0.0.0",
+"parameters": {
+    "vnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/16",
+        "metadata": {
+            "description": "Address prefix for the Virtual Network"
+        }
+    },
+    "subnetPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/28",
+        "metadata": {
+            "description": "Gateway Subnet prefix"
+        }
+    },
+    "skuName": {
+        "type": "string",
+        "allowedValues": [
+            "Standard_Small",
+            "Standard_Medium",
+            "Standard_Large"
+        ],
+        "defaultValue": "Standard_Small",
+        "metadata": {
+            "description": "Sku Name"
+        }
+    },
+    "capacity": {
+        "type": "int",
+        "defaultValue": 4,
+        "metadata": {
+            "description": "Number of instances"
+        }
+    },
+    "backendIpAddress1": {
+        "type": "string",
+        "metadata": {
+            "description": "IP Address for Backend Server 1"
+        }
+    },
+    "backendIpAddress2": {
+        "type": "string",
+        "metadata": {
+            "description": "IP Address for Backend Server 2"
+        }
+    },
+    "backendIpAddress3": {
+        "type": "string",
+        "metadata": {
+            "description": "IP Address for Backend Server 3"
+        }
+    },
+    "backendIpAddress4": {
+        "type": "string",
+        "metadata": {
+            "description": "IP Address for Backend Server 4"
+        }
+    },
+    "backendIpAddress5": {
+        "type": "string",
+        "metadata": {
+            "description": "IP Address for Backend Server 5"
+        }
+    },
+    "backendIpAddress6": {
+        "type": "string",
+        "metadata": {
+            "description": "IP Address for Backend Server 6"
+        }
+    },
+    "hostName1": {
+        "type": "string",
+        "metadata": {
+            "description": "HostName for listener 1"
+        }
+    },
+    "hostName2": {
+        "type": "string",
+        "metadata": {
+            "description": "HostName for listener 2"
+        }
+    },
+    "certData1": {
+        "type": "securestring",
+        "metadata": {
+            "description": "Base-64 encoded form of the .pfx file"
+        }
+    },
+    "certPassword1": {
+        "type": "securestring",
+        "metadata": {
+            "description": "Password for .pfx certificate"
+        }
+    }
+},
+"variables": {
+    "applicationGatewayName": "PortalGateway",
+    "publicIPAddressName": "PortalGatewayFrontendIP",
+    "virtualNetworkName": "PalitonNetworks-East-VirtualNetwork",
+    "subnetName": "GWSubnet1",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+    "publicIPRef": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
+    "applicationGatewayID": "[resourceId('Microsoft.Network/applicationGateways',variables('applicationGatewayName'))]",
+    "apiVersion": "2015-06-15"
+},
+"resources": [
+    {
+        "apiVersion": "[variables('apiVersion')]",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[variables('publicIPAddressName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "publicIPAllocationMethod": "Dynamic"
+        }
+    },
+    {
+        "apiVersion": "[variables('apiVersion')]",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[variables('virtualNetworkName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "addressSpace": {
+                "addressPrefixes": [
+                    "[parameters('vnetAddressPrefix')]"
+                ]
+            },
+            "subnets": [
+                {
+                    "name": "[variables('subnetName')]",
+                    "properties": {
+                        "addressPrefix": "[parameters('subnetPrefix')]"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "apiVersion": "[variables('apiVersion')]",
+        "name": "[variables('applicationGatewayName')]",
+        "type": "Microsoft.Network/applicationGateways",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+            "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+            "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]"
+        ],
+        "properties": {
+            "sku": {
+                "name": "[parameters('skuName')]",
+                "tier": "Standard",
+                "capacity": "[parameters('capacity')]"
+            },
+            "sslCertificates": [
+                {
+                    "name": "appGatewaySslCert1",
+                    "properties": {
+                        "data": "[parameters('certData1')]",
+                        "password": "[parameters('certPassword1')]"
+                    }
+                }
+
+            ],
+            "gatewayIPConfigurations": [
+                {
+                    "name": "appGatewayIpConfig",
+                    "properties": {
+                        "subnet": {
+                            "id": "[variables('subnetRef')]"
+                        }
+                    }
+                }
+            ],
+            "frontendIPConfigurations": [
+                {
+                    "name": "appGatewayFrontendIP",
+                    "properties": {
+                        "PublicIPAddress": {
+                            "id": "[variables('publicIPRef')]"
+                        }
+                    }
+                }
+            ],
+            "frontendPorts": [
+                {
+                    "name": "appGatewayFrontendPort1",
+                    "properties": {
+                        "Port": 443
+                    }
+                },
+                {
+                    "name": "appGatewayFrontendPort2",
+                    "properties": {
+                        "Port": 80
+                    }
+                }
+            ],
+            "backendAddressPools": [
+                {
+                    "name": "appGatewayBackendPool1",
+                    "properties": {
+                        "BackendAddresses": [
+                            {
+                                "IpAddress": "[parameters('backendIpAddress1')]"
+                            },
+                            {
+                                "IpAddress": "[parameters('backendIpAddress2')]"
+                            },
+                            {
+                                "IpAddress": "[parameters('backendIpAddress3')]"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "appGatewayBackendPool2",
+                    "properties": {
+                        "BackendAddresses": [
+                            {
+                                "IpAddress": "[parameters('backendIpAddress4')]"
+                            },
+                            {
+                                "IpAddress": "[parameters('backendIpAddress5')]"
+                            },
+                            {
+                                "IpAddress": "[parameters('backendIpAddress6')]"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "backendHttpSettingsCollection": [
+                {
+                    "name": "appGatewayBackendHttpSettings",
+                    "properties": {
+                        "Port": 80,
+                        "Protocol": "Http",
+                        "CookieBasedAffinity": "Disabled"
+                    }
+                },
+                {
+                    "name": "appGatewayBackendHttpsSettings",
+                    "properties": {
+                        "Port": 443,
+                        "Protocol": "Https",
+                        "CookieBasedAffinity": "Disabled"
+                    }
+                }
+            ],
+            "httpListeners": [
+                {
+                    "name": "appGatewayHttpsListener-Group1",
+                    "properties": {
+                        "FrontendIPConfiguration": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayFrontendIP')]"
+                        },
+                        "FrontendPort": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort1')]"
+                        },
+                        "Protocol": "Https",
+                        "SslCertificate": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/sslCertificates/appGatewaySslCert1')]"
+                        },
+                        "HostName": "[parameters('hostName1')]",
+                        "RequireServerNameIndication": "false"
+                    }
+                },
+                {
+                    "name": "appGatewayHttpsListener-Group2",
+                    "properties": {
+                        "FrontendIPConfiguration": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayFrontendIP')]"
+                        },
+                        "FrontendPort": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort1')]"
+                        },
+                        "Protocol": "Https",
+                        "SslCertificate": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/sslCertificates/appGatewaySslCert1')]"
+                        },
+                        "HostName": "[parameters('hostName2')]",
+                        "RequireServerNameIndication": "false"
+                    }
+                },
+        {
+                    "name": "appGatewayHttpListener-Group1",
+                    "properties": {
+                        "FrontendIPConfiguration": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayFrontendIP')]"
+                        },
+                        "FrontendPort": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort2')]"
+                        },
+                        "Protocol": "Http",
+                        "SslCertificate": null,
+                        "HostName": "[parameters('hostName1')]",
+                        "RequireServerNameIndication": "false"
+                    }
+                },
+        {
+                    "name": "appGatewayHttpListener-Group2",
+                    "properties": {
+                        "FrontendIPConfiguration": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayFrontendIP')]"
+                        },
+                        "FrontendPort": {
+                            "Id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort2')]"
+                        },
+                        "Protocol": "Http",
+                        "SslCertificate": null,
+                        "HostName": "[parameters('hostName2')]",
+                        "RequireServerNameIndication": "false"
+                    }
+                }
+            ],
+            "requestRoutingRules": [
+                {
+                    "Name": "Group1-SSL",
+                    "properties": {
+                        "RuleType": "Basic",
+                        "httpListener": {
+                            "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayHttpsListener-Group1')]"
+                        },
+                        "backendAddressPool": {
+                            "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/appGatewayBackendPool1')]"
+                        },
+                        "backendHttpSettings": {
+                            "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+                        }
+                    }
+                },
+                {
+                    "Name": "Group2-SSL",
+                    "properties": {
+                        "RuleType": "Basic",
+                        "httpListener": {
+                            "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayHttpsListener-Group2')]"
+                        },
+                        "backendAddressPool": {
+                            "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/appGatewayBackendPool2')]"
+                        },
+                        "backendHttpSettings": {
+                            "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+                        }
+                    }
+                },
+        {
+                    "Name": "Group2-www",
+                    "properties": {
+                        "RuleType": "Basic",
+                        "httpListener": {
+                            "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayHttpListener-Group1')]"
+                        },
+                        "backendAddressPool": {
+                            "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/appGatewayBackendPool1')]"
+                        },
+                        "backendHttpSettings": {
+                            "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+                        }
+                    }
+                },
+        {
+                    "Name": "Group1-www",
+                    "properties": {
+                        "RuleType": "Basic",
+                        "httpListener": {
+                            "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayHttpListener-Group2')]"
+                        },
+                        "backendAddressPool": {
+                            "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/appGatewayBackendPool2')]"
+                        },
+                        "backendHttpSettings": {
+                            "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]
+}

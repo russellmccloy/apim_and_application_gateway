@@ -1,0 +1,345 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "publicIPAddresses_appgw_test02_pip_domainNameLabel": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "service_contosoapi_name": {
+            "defaultValue": "contosoapi",
+            "type": "String"
+        },
+        "virtualMachines_RussGenericVM_name": {
+            "defaultValue": "RussGenericVM",
+            "type": "String"
+        },
+        "networkInterfaces_russgenericvm925_name": {
+            "defaultValue": "russgenericvm925",
+            "type": "String"
+        },
+        "networkSecurityGroups_RussGenericVM_nsg_name": {
+            "defaultValue": "RussGenericVM-nsg",
+            "type": "String"
+        },
+        "publicIPAddresses_appgw_test02_pip_name": {
+            "defaultValue": "appgw-test02-pip",
+            "type": "String"
+        },
+        "publicIPAddresses_RussGenericVM_ip_name": {
+            "defaultValue": "RussGenericVM-ip",
+            "type": "String"
+        },
+        "virtualNetworks_appgwvnet_name": {
+            "defaultValue": "appgwvnet",
+            "type": "String"
+        },
+        "storageAccounts_apimgenericrgdiag412_name": {
+            "defaultValue": "apimgenericrgdiag412",
+            "type": "String"
+        },
+        "storageAccounts_apimgenericrgdisks355_name": {
+            "defaultValue": "apimgenericrgdisks355",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.ApiManagement/service/contosoapi'.",
+            "type": "Microsoft.ApiManagement/service",
+            "sku": {
+                "name": "Developer",
+                "capacity": 1
+            },
+            "name": "[parameters('service_contosoapi_name')]",
+            "apiVersion": "2016-07-07",
+            "location": "Australia Southeast",
+            "tags": {},
+            "properties": {
+                "publisherEmail": "russm@MEXIA.onmicrosoft.com",
+                "publisherName": "rusty",
+                "provisioningState": "Succeeded",
+                "targetProvisioningState": "",
+                "createdAtUtc": "2017-03-30T23:47:21.4742541Z",
+                "runtimeUrl": "[concat('https://', parameters('service_contosoapi_name'),'.azure-api.net')]",
+                "portalUrl": "[concat('https://', parameters('service_contosoapi_name'),'.portal.azure-api.net')]",
+                "managementApiUrl": "[concat('https://', parameters('service_contosoapi_name'),'.management.azure-api.net')]",
+                "scmUrl": "[concat('https://', parameters('service_contosoapi_name'),'.scm.azure-api.net')]",
+                "addresserEmail": null,
+                "hostnameConfigurations": [
+                    {
+                        "type": 1,
+                        "hostname": "api.bsappgwpoc.mexia.com.au",
+                        "certificate": {
+                            "expiry": "2018-04-06T03:42:44+00:00",
+                            "thumbprint": "ED4E38D12EAC403AFFE0012B92E99D32813A4E5B",
+                            "subject": "CN=api.bsappgwpoc.mexia.com.au, O=Internet Widgits Pty Ltd, S=Some-State, C=AU"
+                        }
+                    },
+                    {
+                        "type": 2,
+                        "hostname": "portal.bsappgwpoc.mexia.com.au",
+                        "certificate": {
+                            "expiry": "2018-04-06T03:42:25+00:00",
+                            "thumbprint": "E23BFBEEAAD1C21B6197FA3DDFAFE0C166B3B66E",
+                            "subject": "CN=portal.bsappgwpoc.mexia.com.au, O=Internet Widgits Pty Ltd, S=Some-State, C=AU"
+                        }
+                    }
+                ],
+                "staticIPs": [
+                    "10.0.1.7"
+                ],
+                "additionalLocations": null,
+                "vpnconfiguration": {
+                    "subnetResourceId": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_appgwvnet_name')), '/subnets/subApim02')]",
+                    "location": "Australia Southeast"
+                },
+                "customProperties": null,
+                "vpnType": 2
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_appgwvnet_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Compute/virtualMachines/RussGenericVM'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_RussGenericVM_name')]",
+            "apiVersion": "2016-04-30-preview",
+            "location": "australiasoutheast",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Basic_A2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2012-R2-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[parameters('virtualMachines_RussGenericVM_name')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_apimgenericrgdisks355_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_RussGenericVM_name'),'20170331085948.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_RussGenericVM_name')]",
+                    "adminUsername": "russell.mccloy",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_russgenericvm925_name'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true,
+                        "storageUri": "[concat('https', '://', parameters('storageAccounts_apimgenericrgdiag412_name'), '.blob.core.windows.net', '/')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_apimgenericrgdisks355_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_russgenericvm925_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_apimgenericrgdiag412_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/networkInterfaces/russgenericvm925'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_russgenericvm925_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "australiasoutheast",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.3.4",
+                            "privateIPAllocationMethod": "Static",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_RussGenericVM_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_appgwvnet_name')), '/subnets/MyVM')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_RussGenericVM_nsg_name'))]"
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_RussGenericVM_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_appgwvnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_RussGenericVM_nsg_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/networkSecurityGroups/RussGenericVM-nsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_RussGenericVM_nsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "australiasoutheast",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-rdp",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "outboundhttp",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 100,
+                            "direction": "Outbound"
+                        }
+                    },
+                    {
+                        "name": "outboundhttps",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "443",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 110,
+                            "direction": "Outbound"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/publicIPAddresses/appgw-test02-pip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_appgw_test02_pip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "australiasoutheast",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('publicIPAddresses_appgw_test02_pip_domainNameLabel')]"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/publicIPAddresses/RussGenericVM-ip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_RussGenericVM_ip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "australiasoutheast",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/virtualNetworks/appgwvnet'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_appgwvnet_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "australiasoutheast",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": []
+                },
+                "subnets": [
+                    {
+                        "name": "subApim02",
+                        "properties": {
+                            "addressPrefix": "10.0.1.0/24"
+                        }
+                    },
+                    {
+                        "name": "subAppGW",
+                        "properties": {
+                            "addressPrefix": "10.0.2.0/24"
+                        }
+                    },
+                    {
+                        "name": "MyVM",
+                        "properties": {
+                            "addressPrefix": "10.0.3.0/24"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-generic-rg/providers/Microsoft.Storage/storageAccounts/apimgenericrgdiag412'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_apimgenericrgdiag412_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "australiasoutheast",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-generic-rg/providers/Microsoft.Storage/storageAccounts/apimgenericrgdisks355'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_apimgenericrgdisks355_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "australiasoutheast",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        }
+    ]
+}

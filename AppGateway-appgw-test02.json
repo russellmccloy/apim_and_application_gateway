@@ -1,0 +1,215 @@
+{
+  "name": "appgw-test02",
+  "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02",
+  "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+  "type": "Microsoft.Network/applicationGateways",
+  "location": "australiasoutheast",
+  "properties": {
+    "provisioningState": "Succeeded",
+    "resourceGuid": "9e7ec923-f770-4676-8028-e1c612f89e6b",
+    "sku": {
+      "name": "WAF_Medium",
+      "tier": "WAF",
+      "capacity": 2
+    },
+    "gatewayIPConfigurations": [
+      {
+        "name": "appGatewayIpConfig",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/gatewayIPConfigurations/appGatewayIpConfig",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "subnet": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/virtualNetworks/appgwvnet/subnets/subAppGW"
+          }
+        }
+      }
+    ],
+    "sslCertificates": [
+      {
+        "name": "api.bsappgwpoc.mexia.com.au",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/sslCertificates/api.bsappgwpoc.mexia.com.au",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "publicCertData": "MIIEWQYJKoZIhvcNAQcCoIIESjCCBEYCAQExADALBgkqhkiG9w0BBwGgggQuMIIEKjCCAxKgAwIBAgIJALFXZVt7wj/hMA0GCSqGSIb3DQEBCwUAMGsxCzAJBgNVBAYTAkFVMRMwEQYDVQQIEwpTb21lLVN0YXRlMSEwHwYDVQQKExhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxJDAiBgNVBAMTG2FwaS5ic2FwcGd3cG9jLm1leGlhLmNvbS5hdTAeFw0xNzA0MDYwMzQyNDRaFw0xODA0MDYwMzQyNDRaMGsxCzAJBgNVBAYTAkFVMRMwEQYDVQQIEwpTb21lLVN0YXRlMSEwHwYDVQQKExhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxJDAiBgNVBAMTG2FwaS5ic2FwcGd3cG9jLm1leGlhLmNvbS5hdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMAc8TPIAdhEJqq8pIEfEUf/dMrrqiu8+NXdvdwei0sTf+dLVG3yQ9FEqCE5xChIzAMQ8IkkLFrb6dUyt2uNc4WzrJUEGurJF6LQ0hkxvSvs+ZA1CQI9tkUq7IARkvB5lj+Y5gGqfelHVPAo2UvyB6aNnCBl2NopeVFD3dunNZzX6OZMj0EIfJPWYJDBtAw9eoKjv+FdMqAG4tT9BwMPPWRSGMtFhS3cbp0qmZrgtMfR5LO/sXX9j23pxgPK7gwdLR5i9e1U3Dmtb/diCDkPy+0acFji3ckHFTsycHWguwd6GmUu3aholrIg5/X4ltevh7U++4r/WF1B7WtM4Z+lf10CAwEAAaOB0DCBzTAdBgNVHQ4EFgQUCYbuJjr4sJLfquRps0eg/j1dufowgZ0GA1UdIwSBlTCBkoAUCYbuJjr4sJLfquRps0eg/j1dufqhb6RtMGsxCzAJBgNVBAYTAkFVMRMwEQYDVQQIEwpTb21lLVN0YXRlMSEwHwYDVQQKExhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxJDAiBgNVBAMTG2FwaS5ic2FwcGd3cG9jLm1leGlhLmNvbS5hdYIJALFXZVt7wj/hMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAEB1zsu3VtRtAP+eQ7J+QPa9N+A5onDag/zDvkfrBVagfR737c3ixfJ7SzmkbGMQhGXoIAZLM9aO/+rXJUUJmZ5qBwELmFVhh7p1ZIP10WO782i72J8kZ5HHasIhPyiS+XCBka64BrdofRMZPW3THiPdaqzgedDenUsRI72lHRxWo6hieNrNnMWAWQEsB4jnM9vzCt6NcclqL4KBZ8v+xZ4AXXQmMNVR99AG06RQnEA3ejlhJ6RpCOvCyQ+OYg6bLTsOzbSJHBb4vEgWn28+l4fjSxUqnIEAVFA1ctHft/amke/uvKDSLopr2lBzjbt01JOaD/cmyBKGexO3uloTCvExAA==",
+          "httpListeners": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/httpListeners/appGatewayHttpListener"
+            }
+          ]
+        }
+      }
+    ],
+    "authenticationCertificates": [
+      {
+        "name": "apicer",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/authenticationCertificates/apicer",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "data": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVLakNDQXhLZ0F3SUJBZ0lKQUxGWFpWdDd3ai9oTUEwR0NTcUdTSWIzRFFFQkN3VUFNR3N4Q3pBSkJnTlYKQkFZVEFrRlZNUk13RVFZRFZRUUlFd3BUYjIxbExWTjBZWFJsTVNFd0h3WURWUVFLRXhoSmJuUmxjbTVsZENCWAphV1JuYVhSeklGQjBlU0JNZEdReEpEQWlCZ05WQkFNVEcyRndhUzVpYzJGd2NHZDNjRzlqTG0xbGVHbGhMbU52CmJTNWhkVEFlRncweE56QTBNRFl3TXpReU5EUmFGdzB4T0RBME1EWXdNelF5TkRSYU1Hc3hDekFKQmdOVkJBWVQKQWtGVk1STXdFUVlEVlFRSUV3cFRiMjFsTFZOMFlYUmxNU0V3SHdZRFZRUUtFeGhKYm5SbGNtNWxkQ0JYYVdSbgphWFJ6SUZCMGVTQk1kR1F4SkRBaUJnTlZCQU1URzJGd2FTNWljMkZ3Y0dkM2NHOWpMbTFsZUdsaExtTnZiUzVoCmRUQ0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQU1BYzhUUElBZGhFSnFxOHBJRWYKRVVmL2RNcnJxaXU4K05YZHZkd2VpMHNUZitkTFZHM3lROUZFcUNFNXhDaEl6QU1ROElra0xGcmI2ZFV5dDJ1TgpjNFd6ckpVRUd1ckpGNkxRMGhreHZTdnMrWkExQ1FJOXRrVXE3SUFSa3ZCNWxqK1k1Z0dxZmVsSFZQQW8yVXZ5CkI2YU5uQ0JsMk5vcGVWRkQzZHVuTlp6WDZPWk1qMEVJZkpQV1lKREJ0QXc5ZW9LanYrRmRNcUFHNHRUOUJ3TVAKUFdSU0dNdEZoUzNjYnAwcW1acmd0TWZSNUxPL3NYWDlqMjNweGdQSzdnd2RMUjVpOWUxVTNEbXRiL2RpQ0RrUAp5KzBhY0ZqaTNja0hGVHN5Y0hXZ3V3ZDZHbVV1M2Fob2xySWc1L1g0bHRldmg3VSsrNHIvV0YxQjdXdE00WitsCmYxMENBd0VBQWFPQjBEQ0J6VEFkQmdOVkhRNEVGZ1FVQ1lidUpqcjRzSkxmcXVScHMwZWcvajFkdWZvd2daMEcKQTFVZEl3U0JsVENCa29BVUNZYnVKanI0c0pMZnF1UnBzMGVnL2oxZHVmcWhiNlJ0TUdzeEN6QUpCZ05WQkFZVApBa0ZWTVJNd0VRWURWUVFJRXdwVGIyMWxMVk4wWVhSbE1TRXdId1lEVlFRS0V4aEpiblJsY201bGRDQlhhV1JuCmFYUnpJRkIwZVNCTWRHUXhKREFpQmdOVkJBTVRHMkZ3YVM1aWMyRndjR2QzY0c5akxtMWxlR2xoTG1OdmJTNWgKZFlJSkFMRlhaVnQ3d2ovaE1Bd0dBMVVkRXdRRk1BTUJBZjh3RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUVCMQp6c3UzVnRSdEFQK2VRN0orUVBhOU4rQTVvbkRhZy96RHZrZnJCVmFnZlI3MzdjM2l4Zko3U3pta2JHTVFoR1hvCklBWkxNOWFPLytyWEpVVUptWjVxQndFTG1GVmhoN3AxWklQMTBXTzc4Mmk3Mko4a1o1SEhhc0loUHlpUytYQ0IKa2E2NEJyZG9mUk1aUFczVEhpUGRhcXpnZWREZW5Vc1JJNzJsSFJ4V282aGllTnJObk1XQVdRRXNCNGpuTTl2egpDdDZOY2NscUw0S0JaOHYreFo0QVhYUW1NTlZSOTlBRzA2UlFuRUEzZWpsaEo2UnBDT3ZDeVErT1lnNmJMVHNPCnpiU0pIQmI0dkVnV24yOCtsNGZqU3hVcW5JRUFWRkExY3RIZnQvYW1rZS91dktEU0xvcHIybEJ6amJ0MDFKT2EKRC9jbXlCS0dleE8zdWxvVEN2RT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=",
+          "backendHttpSettings": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/backendHttpSettingsCollection/appGatewayBackendHttpSettings"
+            }
+          ]
+        }
+      }
+    ],
+    "frontendIPConfigurations": [
+      {
+        "name": "appGatewayFrontendIP",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/frontendIPConfigurations/appGatewayFrontendIP",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateIPAllocationMethod": "Dynamic",
+          "publicIPAddress": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/publicIPAddresses/appgw-test02-pip"
+          },
+          "httpListeners": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/httpListeners/appGatewayHttpListener"
+            }
+          ]
+        }
+      }
+    ],
+    "frontendPorts": [
+      {
+        "name": "appGatewayFrontendPort",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/frontendPorts/appGatewayFrontendPort",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "port": 443,
+          "httpListeners": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/httpListeners/appGatewayHttpListener"
+            }
+          ]
+        }
+      }
+    ],
+    "backendAddressPools": [
+      {
+        "name": "appGatewayBackendPool",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/backendAddressPools/appGatewayBackendPool",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "backendAddresses": [
+            {
+              "ipAddress": "10.0.1.7"
+            }
+          ],
+          "requestRoutingRules": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/requestRoutingRules/rule1"
+            }
+          ]
+        }
+      }
+    ],
+    "backendHttpSettingsCollection": [
+      {
+        "name": "appGatewayBackendHttpSettings",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/backendHttpSettingsCollection/appGatewayBackendHttpSettings",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "port": 443,
+          "protocol": "Https",
+          "cookieBasedAffinity": "Disabled",
+          "requestTimeout": 30,
+          "probe": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/probes/api.bsappgw.mexia.com.au"
+          },
+          "authenticationCertificates": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/authenticationCertificates/apicer"
+            }
+          ],
+          "requestRoutingRules": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/requestRoutingRules/rule1"
+            }
+          ]
+        }
+      }
+    ],
+    "httpListeners": [
+      {
+        "name": "appGatewayHttpListener",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/httpListeners/appGatewayHttpListener",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "frontendIPConfiguration": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/frontendIPConfigurations/appGatewayFrontendIP"
+          },
+          "frontendPort": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/frontendPorts/appGatewayFrontendPort"
+          },
+          "protocol": "Https",
+          "sslCertificate": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/sslCertificates/api.bsappgwpoc.mexia.com.au"
+          },
+          "requireServerNameIndication": false,
+          "requestRoutingRules": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/requestRoutingRules/rule1"
+            }
+          ]
+        }
+      }
+    ],
+    "urlPathMaps": [],
+    "requestRoutingRules": [
+      {
+        "name": "rule1",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/requestRoutingRules/rule1",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ruleType": "Basic",
+          "httpListener": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/httpListeners/appGatewayHttpListener"
+          },
+          "backendAddressPool": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/backendAddressPools/appGatewayBackendPool"
+          },
+          "backendHttpSettings": {
+            "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/backendHttpSettingsCollection/appGatewayBackendHttpSettings"
+          }
+        }
+      }
+    ],
+    "probes": [
+      {
+        "name": "api.bsappgw.mexia.com.au",
+        "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/probes/api.bsappgw.mexia.com.au",
+        "etag": "W/\"f4b04e81-5f8c-403e-94f8-2e58fbd2cf53\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "protocol": "Https",
+          "host": "api.bsappgwpoc.mexia.com.au",
+          "path": "/status-0123456789abcdef",
+          "interval": 30,
+          "timeout": 30,
+          "unhealthyThreshold": 3,
+          "backendHttpSettings": [
+            {
+              "id": "/subscriptions/9e283d70-2fab-434a-944e-ef8deca1e800/resourceGroups/apim-Generic-RG/providers/Microsoft.Network/applicationGateways/appgw-test02/backendHttpSettingsCollection/appGatewayBackendHttpSettings"
+            }
+          ]
+        }
+      }
+    ],
+    "webApplicationFirewallConfiguration": {
+      "enabled": true,
+      "firewallMode": "Detection"
+    }
+  }
+}
